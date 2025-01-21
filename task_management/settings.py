@@ -1,6 +1,6 @@
 from pathlib import Path
 from decouple import config
-
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -85,17 +85,25 @@ WSGI_APPLICATION = 'task_management.wsgi.application'
 #     }
 # }
 
-# For Postgres
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME', default=''),
-        'USER': config('DB_USER', default=''),
-        'PASSWORD': config('DB_PASSWORD', default=''),
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', cast=int)
-    }
+    'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default='postgresql://task_manager_db_3kdk_user:AEGtid11G09n4oUjZ2TJ7TRvYjRviv4O@dpg-cu7u32btq21c738n0alg-a.oregon-postgres.render.com/task_manager_db_3kdk',
+        conn_max_age=600
+    )
 }
+
+# For Postgres
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': config('DB_NAME', default=''),
+#         'USER': config('DB_USER', default=''),
+#         'PASSWORD': config('DB_PASSWORD', default=''),
+#         'HOST': config('DB_HOST', default='localhost'),
+#         'PORT': config('DB_PORT', cast=int)
+#     }
+# }
 
 
 # Password validation
